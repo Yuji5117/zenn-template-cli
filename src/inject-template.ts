@@ -13,14 +13,18 @@ async function main() {
   }
 
   const templateName = templateArg.split("=")[1];
-  const templatePath = path.join(__dirname, "templates", `${templateName}.md`);
+  const templatePath = path.join(
+    process.cwd(),
+    "templates",
+    `${templateName}.md`
+  );
 
   if (!fs.existsSync(templatePath)) {
     console.error(`❌ テンプレート ${templateName} が見つかりません。`);
     process.exit(1);
   }
 
-  const articleDir = path.join(__dirname, "articles");
+  const articleDir = path.join(process.cwd(), "articles");
   const fileNames = await fs.promises.readdir(articleDir);
   const filesWithTime = await Promise.all(
     fileNames
