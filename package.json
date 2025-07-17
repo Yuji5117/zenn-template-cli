@@ -1,14 +1,51 @@
 {
   "name": "zenn-template-cli",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "A CLI tool to inject predefined templates into your Zenn articles",
+  "main": "dist/index.js",
+  "bin": {
+    "zenn-template": "./dist/index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "scripts": {
+    "dev": "ts-node src/inject-template.ts",
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "zenn",
+    "zenn-cli",
+    "article",
+    "markdown",
+    "template",
+    "inject",
+    "generate",
+    "generator",
+    "markdown-generator",
+    "automation",
+    "cli",
+    "command-line",
+    "terminal",
+    "node",
+    "nodejs",
+    "typescript",
+    "developer-tools",
+    "writer-tools",
+    "blog"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "dist",
+    "templates"
+  ],
+  "author": "Yuji Nakamura",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Yuji5117/zenn-template-cli"
+  },
+  "homepage": "https://github.com/Yuji5117/zenn-template-cli#readme",
+  "license": "MIT",
   "dependencies": {
     "inquirer": "^12.7.0"
   },
