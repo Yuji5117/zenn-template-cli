@@ -1,6 +1,6 @@
 # zenn-template-cli
 
-毎回同じ構成を手作業で書くのはもうやめよう。
+毎回同じ構成を手作業で書くのはもうやめよう!!
 
 Zennの記事にテンプレートを差し込んで、執筆をスピードアップできるCLIツールです。
 
@@ -88,6 +88,7 @@ npx zenn-template --template=basic --overwrite
 ## 作者情報
 
 Created by Yuji Nakamura
+
 GitHub: [@Yuji5117](https://github.com/Yuji5117)
 
 ---
