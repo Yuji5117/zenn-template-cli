@@ -43,13 +43,13 @@ your-project/
 作成した記事にテンプレートを差し込みます：
 
 ```bash
-npx zenn-template --template=basic
+zenn-template --template=basic
 ```
 
 記事全体をテンプレートで上書きしたい場合は、--overwrite オプションを追加します：
 
 ```bash
-npx zenn-template --template=basic --overwrite
+zenn-template --template=basic --overwrite
 ```
 
 ### 対象の記事を選択
