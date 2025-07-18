@@ -14,7 +14,7 @@ import { getArticleFile, getTemplateName } from "./utils/propmtUtils";
 async function main() {
   const args = process.argv.slice(2);
   const templateArg = args.find((arg) => arg.startsWith(TEMPLATE_ARG_PREFIX));
-  const overwriteArg = args.includes(OVERWRITE_FLAG);
+  const isOverwrite = args.includes(OVERWRITE_FLAG);
 
   const templateNames = await fs.promises.readdir(TEMPLATE_DIR);
 
@@ -60,7 +60,7 @@ async function main() {
   const originalContent = await fs.promises.readFile(targetPath, "utf-8");
   const templateContent = await fs.promises.readFile(templatePath, "utf-8");
 
-  const newContent = overwriteArg
+  const newContent = isOverwrite
     ? templateContent
     : `${originalContent}\n${templateContent}`;
 
