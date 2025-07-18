@@ -10,6 +10,7 @@ import {
   TEMPLATE_ARG_PREFIX,
   TEMPLATE_DIR,
 } from "./constants";
+import { getArticleFile } from "./utils/propmtUtils";
 
 const selectTemplate = async (templateNames: string[]) => {
   const namesWithoutExt = templateNames.map((name) =>
@@ -74,16 +75,9 @@ async function main() {
     .sort((a, b) => b.mtime.getTime() - a.mtime.getTime())
     .map((entry) => entry.file);
 
-  const { selectedFile } = await inquirer.prompt([
-    {
-      type: "list",
-      name: "selectedFile",
-      message: "テンプレートを適用する記事を選んでください：",
-      choices: sortedFileByLatest,
-    },
-  ]);
+  const selectedArticle = await getArticleFile(sortedFileByLatest);
 
-  const targetPath = path.join(articleDir, selectedFile);
+  const targetPath = path.join(articleDir, selectedArticle);
 
   const originalContent = await fs.promises.readFile(targetPath, "utf-8");
   const templateContent = await fs.promises.readFile(templatePath, "utf-8");
@@ -95,7 +89,7 @@ async function main() {
   await fs.promises.writeFile(targetPath, newContent);
 
   console.log(
-    `✅ テンプレート ${templateName} を ${selectedFile} に適用しました！`
+    `✅ テンプレート ${templateName} を ${selectedArticle} に適用しました！`
   );
 }
 
