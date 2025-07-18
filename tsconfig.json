@@ -5,8 +5,10 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "dist",
-    "rootDir": "src",
+    "rootDir": ".",
     "strict": true,
     "skipLibCheck": true
-  }
+  },
+  "include": ["bin", "src"],
+  "exclude": ["dist"]
 }
