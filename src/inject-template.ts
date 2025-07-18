@@ -4,17 +4,33 @@ import fs from "fs";
 import path from "path";
 import inquirer from "inquirer";
 
+const selectTemplate = async (templateNames: string[]) => {
+  const namesWithoutExt = templateNames.map((name) =>
+    name.replace(/\.md$/, "")
+  );
+  const { selectedTemplate } = await inquirer.prompt([
+    {
+      type: "list",
+      name: "selectedTemplate",
+      message: "適用するテンプレートを選んでください：",
+      choices: namesWithoutExt,
+    },
+  ]);
+
+  return selectedTemplate;
+};
+
 async function main() {
   const args = process.argv.slice(2);
   const templateArg = args.find((arg) => arg.startsWith("--template="));
   const overwriteArg = args.find((arg) => arg === "--overwrite");
 
-  if (!templateArg) {
-    console.error("❌ --template={テンプレート名}を指定してください。");
-    process.exit(1);
-  }
+  const templatesDir = path.join(process.cwd(), "templates");
+  const templateNames = await fs.promises.readdir(templatesDir);
 
-  const templateName = templateArg.split("=")[1];
+  const templateName = templateArg
+    ? templateArg.split("=")[1]
+    : await selectTemplate(templateNames);
   const templatePath = path.join(
     process.cwd(),
     "templates",
