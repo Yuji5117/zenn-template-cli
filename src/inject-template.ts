@@ -2,7 +2,6 @@
 
 import fs from "fs";
 import path from "path";
-import inquirer from "inquirer";
 import {
   ARTICLES_DIR,
   MARKDOWN_EXT,
