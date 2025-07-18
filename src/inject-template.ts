@@ -14,7 +14,7 @@ import { getArticleFile, getTemplateName } from "./utils/propmtUtils";
 async function main() {
   const args = process.argv.slice(2);
   const templateArg = args.find((arg) => arg.startsWith(TEMPLATE_ARG_PREFIX));
-  const overwriteArg = args.find((arg) => arg === OVERWRITE_FLAG);
+  const overwriteArg = args.includes(OVERWRITE_FLAG);
 
   const templatesDir = TEMPLATE_DIR;
   const templateNames = await fs.promises.readdir(templatesDir);
