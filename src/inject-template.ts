@@ -3,6 +3,13 @@
 import fs from "fs";
 import path from "path";
 import inquirer from "inquirer";
+import {
+  ARTICLES_DIR,
+  MARKDOWN_EXT,
+  OVERWRITE_FLAG,
+  TEMPLATE_ARG_PREFIX,
+  TEMPLATE_DIR,
+} from "./constants";
 
 const selectTemplate = async (templateNames: string[]) => {
   const namesWithoutExt = templateNames.map((name) =>
@@ -22,10 +29,10 @@ const selectTemplate = async (templateNames: string[]) => {
 
 async function main() {
   const args = process.argv.slice(2);
-  const templateArg = args.find((arg) => arg.startsWith("--template="));
-  const overwriteArg = args.find((arg) => arg === "--overwrite");
+  const templateArg = args.find((arg) => arg.startsWith(TEMPLATE_ARG_PREFIX));
+  const overwriteArg = args.find((arg) => arg === OVERWRITE_FLAG);
 
-  const templatesDir = path.join(process.cwd(), "templates");
+  const templatesDir = TEMPLATE_DIR;
   const templateNames = await fs.promises.readdir(templatesDir);
 
   const templateName = templateArg
@@ -42,11 +49,11 @@ async function main() {
     process.exit(1);
   }
 
-  const articleDir = path.join(process.cwd(), "articles");
+  const articleDir = ARTICLES_DIR;
   const fileNames = await fs.promises.readdir(articleDir);
   const filesWithTime = await Promise.all(
     fileNames
-      .filter((file) => file.endsWith(".md"))
+      .filter((file) => file.endsWith(MARKDOWN_EXT))
       .map(async (file) => {
         const fullPath = path.join(articleDir, file);
         const stat = await fs.promises.stat(fullPath);
