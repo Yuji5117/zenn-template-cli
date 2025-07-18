@@ -10,23 +10,7 @@ import {
   TEMPLATE_ARG_PREFIX,
   TEMPLATE_DIR,
 } from "./constants";
-import { getArticleFile } from "./utils/propmtUtils";
-
-const selectTemplate = async (templateNames: string[]) => {
-  const namesWithoutExt = templateNames.map((name) =>
-    name.replace(/\.md$/, "")
-  );
-  const { selectedTemplate } = await inquirer.prompt([
-    {
-      type: "list",
-      name: "selectedTemplate",
-      message: "適用するテンプレートを選んでください：",
-      choices: namesWithoutExt,
-    },
-  ]);
-
-  return selectedTemplate;
-};
+import { getArticleFile, getTemplateName } from "./utils/propmtUtils";
 
 async function main() {
   const args = process.argv.slice(2);
@@ -38,7 +22,7 @@ async function main() {
 
   const templateName = templateArg
     ? templateArg.split("=")[1]
-    : await selectTemplate(templateNames);
+    : await getTemplateName(templateNames);
   const templatePath = path.join(
     process.cwd(),
     "templates",
