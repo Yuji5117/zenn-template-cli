@@ -16,17 +16,12 @@ async function main() {
   const templateArg = args.find((arg) => arg.startsWith(TEMPLATE_ARG_PREFIX));
   const overwriteArg = args.includes(OVERWRITE_FLAG);
 
-  const templatesDir = TEMPLATE_DIR;
-  const templateNames = await fs.promises.readdir(templatesDir);
+  const templateNames = await fs.promises.readdir(TEMPLATE_DIR);
 
   const templateName = templateArg
     ? templateArg.split("=")[1]
     : await getTemplateName(templateNames);
-  const templatePath = path.join(
-    process.cwd(),
-    "templates",
-    `${templateName}.md`
-  );
+  const templatePath = path.join(TEMPLATE_DIR, `${templateName}.md`);
 
   if (!fs.existsSync(templatePath)) {
     console.error(`❌ テンプレート ${templateName} が見つかりません。`);
