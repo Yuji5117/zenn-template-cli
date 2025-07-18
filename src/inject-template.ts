@@ -49,11 +49,11 @@ async function main() {
     process.exit(1);
   }
 
-  const sortedFileByLatest = filesWithTime
+  const sortedFilesByLatest = filesWithTime
     .sort((a, b) => b.mtime.getTime() - a.mtime.getTime())
     .map((entry) => entry.file);
 
-  const selectedArticle = await getArticleFile(sortedFileByLatest);
+  const selectedArticle = await getArticleFile(sortedFilesByLatest);
 
   const targetPath = path.join(articleDir, selectedArticle);
 
