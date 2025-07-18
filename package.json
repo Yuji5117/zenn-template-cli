@@ -1,6 +1,6 @@
 {
   "name": "zenn-template-cli",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A CLI tool to inject predefined templates into your Zenn articles",
   "main": "dist/bin/index.js",
   "bin": {
